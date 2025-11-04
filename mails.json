@@ -7,12 +7,6 @@
         "subject": "Application for Senior DevOps Engineer - {company_name}",
         "summary": "I’m writing to express my interest in the <b>DevOps Engineer</b> position at <b>{company_name}</b>. With 4.8 years of experience in <b>AWS, Terraform, Kubernetes, Ansible, Jenkins, Docker,</b> and <b>CI/CD automation</b>, I specialize in building scalable cloud infrastructures and implementing <b>DevSecOps</b> and <b>AI-based monitoring</b> solutions. I’m skilled in monitoring and logging tools like <b>Prometheus</b>, <b>Grafana</b>, and <b>ELK Stack</b>, with a strong focus on security integration using SonarQube, Trivy, and Snyk. Additionally, I bring proficiency in <b>Python</b> and <b>Shell scripting</b>."
     },
-    {
-        "name": "mohan",
-        "email": "mohan14242@gmail.com",
-        "company": "DNV",
-        "subject": "Application for Senior DevOps Engineer - {company_name}",
-        "summary": "I’m writing to express my interest in the <b>DevOps Engineer</b> position at <b>{company_name}</b>. With 4.8 years of experience in <b>AWS, Terraform, Kubernetes, Ansible, Jenkins, Docker,</b> and <b>CI/CD automation</b>, I specialize in building scalable cloud infrastructures and implementing <b>DevSecOps</b> and <b>AI-based monitoring</b> solutions. I’m skilled in monitoring and logging tools like <b>Prometheus</b>, <b>Grafana</b>, and <b>ELK Stack</b>, with a strong focus on security integration using SonarQube, Trivy, and Snyk. Additionally, I bring proficiency in <b>Python</b> and <b>Shell scripting</b>."
-    }
+
     
 ]
