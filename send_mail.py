@@ -1,3 +1,4 @@
+import os
 import smtplib
 import json
 from email.mime.text import MIMEText
@@ -5,17 +6,17 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.base import MIMEBase
 from email import encoders
 
-# --- Configuration ---
-sender_email = "mohanagasta1998@gmail.com"
-password = "bofjpfgnlezmqexu"  # Use Gmail App Password
-resume_path = "MOHAN_A_AWS_DevOps_Engineer_Resume.pdf"
-json_path = "mails.json"  # Path to JSON file containing HR details
+# --- Environment Variables ---
+sender_email = os.getenv("SENDER_EMAIL")
+password = os.getenv("GMAIL_APP_PASSWORD")
 
-# --- Read JSON data ---
+resume_path = "MOHAN_A_AWS_DevOps_Engineer_Resume.pdf"
+json_path = "mails.json"
+
+# --- Load HR data ---
 with open(json_path, "r", encoding="utf-8") as f:
     hr_list = json.load(f)
 
-# --- Loop through HR list ---
 for hr in hr_list:
     hr_name = hr.get("name", "")
     hr_email = hr.get("email", "")
@@ -34,39 +35,30 @@ for hr in hr_list:
     <b>Mohan A</b><br>
     AWS & DevOps Engineer<br>
     📞 +91 9121844231<br>
-    ✉️ <a href="mailto:mohanagasta1998@gmail.com">mohanagasta1998@gmail.com</a><br>
+    ✉️ <a href="mailto:{sender_email}">{sender_email}</a><br>
     🔗 <a href="https://www.linkedin.com/in/mohan-a-8a0011397">LinkedIn Profile</a>
     </p>
     </body>
     </html>
     """
 
-    # --- Create the email message ---
     msg = MIMEMultipart("mixed")
     msg["From"] = sender_email
     msg["To"] = hr_email
     msg["Subject"] = subject
     msg.attach(MIMEText(html_body, "html"))
 
-    # --- Attach resume ---
-    try:
-        with open(resume_path, "rb") as f:
-            part = MIMEBase("application", "octet-stream")
-            part.set_payload(f.read())
-        encoders.encode_base64(part)
-        part.add_header("Content-Disposition", f"attachment; filename={resume_path.split('/')[-1]}")
-        msg.attach(part)
-    except FileNotFoundError:
-        print(f"⚠️ Resume file not found: {resume_path}")
-        continue
+    # Attach resume
+    with open(resume_path, "rb") as f:
+        part = MIMEBase("application", "octet-stream")
+        part.set_payload(f.read())
+    encoders.encode_base64(part)
+    part.add_header("Content-Disposition", f"attachment; filename={resume_path.split('/')[-1]}")
+    msg.attach(part)
 
-    # --- Send the email ---
-    try:
-        with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
-            server.login(sender_email, password)
-            server.send_message(msg)
-        print(f"✅ Email sent successfully to {hr_name} ({hr_email}) at {company_name}")
-    except Exception as e:
-        print(f"❌ Failed to send email to {hr_name} ({hr_email}): {e}")
+    # Send email
+    with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
+        server.login(sender_email, password)
+        server.send_message(msg)
 
-print("\n🎉 All emails processed successfully!")
+    print(f"✅ Sent mail to {hr_name} ({hr_email}) at {company_name}")
