@@ -16,7 +16,7 @@ if not sender_email or not password:
 
 # --- File Paths ---
 resume_path = "MOHAN_A_AWS_DevOps_Engineer_Resume.pdf"
-json_path = "mails.json"
+json_path = "hr_referral.json"
 log_path = "sent_log.txt"
 
 # --- Load HR Data ---
